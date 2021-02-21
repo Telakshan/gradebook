@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://dante:dante@courses.aclmb.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "jwtSecret": "secrettoken"
+}

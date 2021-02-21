@@ -1,0 +1,56 @@
+*{
+    color: white;
+    box-sizing: border-box;
+}
+
+p{
+    margin-top: 20px;
+}
+
+.register{
+    justify-content: center;
+    margin: 20px auto auto;
+    padding: 16px;
+    max-width: 800px;
+    font-size: 24px;
+}
+label{
+    font-size: 20px;
+}
+
+input[type=text], input[type=password]{
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    color: black;
+    font-size: 15px;
+}
+
+input[type=text]:focus, input[type=password]:focus{
+    background-color: #ddd;
+    outline: none;
+}
+
+button{
+    background-color: #61DBFB;
+    color: black;
+    padding: 12px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+button:hover{
+    background-color: #99e9fd;
+    color: white;
+}
+
+.register-text{
+    color: #61DBFB;
+}
+
+.register-text:hover{
+    color: white;
+}

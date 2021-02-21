@@ -1,0 +1,14 @@
+button{
+    display: inline-block;
+    background-color: #61DBFB;
+    color: black;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+button:hover{
+    background-color: #99e9fd;
+    color: white;
+}

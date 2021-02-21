@@ -1,0 +1,54 @@
+*{
+    box-sizing: border-box;
+    font-size: medium;
+}
+
+.course-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+
+p{
+    margin-bottom: 10px;
+}
+
+.course{
+    max-width: 600px;
+    min-height: 200px;
+    margin: 20px auto;
+    overflow: auto;
+    background-color: #212c3e;
+    padding: 30px;
+    border-radius: 3px;
+}
+
+.assignment{
+    border: 1px solid #61DBFB;
+    margin: 5px;
+    padding: 30px 20px;
+    color: black;
+}
+.assignment > input{
+    width: 20%;
+    border: 2px solid #61DBFB;
+    justify-content: space-between;
+    margin-right: 20px;
+}
+
+.close{
+    float: right;
+    cursor: pointer;
+}
+
+.grade{
+    display: none;
+}
+
+.d-grade{
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+}
