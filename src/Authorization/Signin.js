@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from "react";
-import Button from "../shared/components/Button/Button";
-import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { connect } from  'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../actions/auth';
+import {Link, Redirect} from 'react-router-dom';
 import "./Auth.css";
 
-const Signin = () => {
+const Signin = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
 
     email: "",
@@ -16,13 +17,16 @@ const Signin = () => {
 
   const onSubmit = async e => {
       e.preventDefault();
-
-    ////  axios.post('/api/auth')
-      console.log('Success');
+      login(email, password);
   }
 
   const onChange = (n) =>
     setFormData({ ...formData, [n.target.name]: n.target.value });
+
+
+  if(isAuthenticated){
+    return <Redirect to='/dashboard'/>
+  }
 
   return (
      
@@ -63,4 +67,13 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+})
+
+Signin.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+}
+
+export default connect(mapStateToProps, { login })(Signin);

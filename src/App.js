@@ -1,4 +1,4 @@
-import { Landing } from "./Landing/Landing";
+import Landing from "./Landing/Landing";
 import {
   BrowserRouter as Router,
   Route,
@@ -11,11 +11,16 @@ import Signin from "./Authorization/Signin";
 import Course from "./courses/components/Course";
 import React, { Fragment, useEffect } from "react";
 import store from "./store";
-import Alert from './shared/components/Alert/Alert'
-import "./App.css";
+import Alert from './shared/components/Alert/Alert';
+import Dashboard from './NewsFeed/Dashboard';
 import { Provider } from "react-redux";
 import { loadUser } from './actions/auth';
+import PrivateRoute from './routing/PrivateRoute';
 import setAuthToken from './utils/setAuthToken';
+import CreateProfile from './ProfileForm/CreateProfile';
+
+import "./App.css";
+
 
 if(localStorage.token){
   setAuthToken(localStorage.token);
@@ -39,6 +44,9 @@ const App = () => {
               <Route path="/register" component={Register} exact />
               <Route path="/signin" component={Signin} exact />
               <Route path="/course" component={Course} exact />
+              <PrivateRoute exact path="/dashboard" component={Dashboard} exact />
+              <PrivateRoute exact path="/create-profile" component={CreateProfile} exact />
+
             </Switch>
           </section>
         </Fragment>

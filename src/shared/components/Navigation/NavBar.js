@@ -1,34 +1,72 @@
-import React from "react";
+import React, {Fragment} from "react";
 import { Link } from "react-router-dom";
 import logo from "../laptop-outline.svg";
 import Signin from "../../../Authorization/Signin";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../../../actions/auth';
 import "./NavBar.css";
 
-export const NavLinks = () => {
-  return (
-    <nav className="nav-bar">
+export const NavBar = ({ auth: {isAuthenticated, loading}, logout}) => {
 
-      <img src={logo} className="logo"></img>
+  const authLinks = (
 
+    <ul className="nav-menu">
 
-      <Link to="/">
-        <h1 className="logo-font">gradebook</h1>
+      <li>
+        <Link to='/dashboard'>Dashboard</Link>
+      </li>
+        
+        <li>
+          <Link to="/course">My Courses</Link>
+        </li>
+        <li>
+          <Link onClick={logout} to='#!'>Sign out</Link>
+        </li>
+      </ul>
 
-      </Link>
+  );
 
-      <ul className="nav-menu">
+  const guestLinks = (
+    
+    <ul className="nav-menu">
         <li>
           <Link to="/">Add courses</Link>
         </li>
         <li>
-          <Link to="/course">My courses</Link>
+          <Link to="/register">Register</Link>
         </li>
         <li>
           <Link to="/signin">Sign in</Link>
         </li>
       </ul>
+  );
+
+
+  
+  return (
+    <nav className="nav-bar">
+
+      <img src={logo} className="logo"></img>
+
+      <Link to="/">
+        <h1 className="logo-font">gradebook</h1>
+      </Link>
+
+      {!loading && (<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>)}
+
+      
     </nav>
   );
 };
 
-export default NavLinks;
+NavBar.protoTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, { logout })(NavBar);
