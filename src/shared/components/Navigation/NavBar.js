@@ -9,6 +9,12 @@ import "./NavBar.css";
 
 export const NavBar = ({ auth: {isAuthenticated, loading}, logout}) => {
 
+  const style = {
+    height: '75%',
+    paddingRight: '5px',
+    paddingLeft: '5px'
+  }
+
   const authLinks = (
 
     <ul className="nav-menu">
@@ -30,9 +36,7 @@ export const NavBar = ({ auth: {isAuthenticated, loading}, logout}) => {
   const guestLinks = (
     
     <ul className="nav-menu">
-        <li>
-          <Link to="/">Add courses</Link>
-        </li>
+        
         <li>
           <Link to="/register">Register</Link>
         </li>
@@ -46,8 +50,10 @@ export const NavBar = ({ auth: {isAuthenticated, loading}, logout}) => {
   
   return (
     <nav className="nav-bar">
+     <Link className='logo'>
+     <img src={logo} style={style}></img>
 
-      <img src={logo} className="logo"></img>
+     </Link>
 
       <Link to="/">
         <h1 className="logo-font">gradebook</h1>

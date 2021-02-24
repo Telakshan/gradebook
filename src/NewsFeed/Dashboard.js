@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import Loading from "../Loading/Loading";
-//import Button from './shared/components/Button';
 import { getCurrentProfile } from "../actions/profile";
+import DashboardAction from './DashboardAction';
 
 import "./Dashboard.css";
 
@@ -33,6 +33,7 @@ const Dashboard = ({
           </Fragment>
           
         )}
+        <DashboardAction/>
       </div>
     </Fragment>
   );

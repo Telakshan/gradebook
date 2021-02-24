@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Link, withRouter } from 'react-router-dom';
+import { createProfile } from '../actions/profile';
 
 import './CreateProfile.css';
 
-const CreateProfile = () => {
+const CreateProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
     college: "",
     gradeLevel: "",
@@ -14,7 +16,8 @@ const CreateProfile = () => {
   const { college, gradeLevel, major, shortBio } = formData;
 
   const onSubmit = (e) => {
-    console.log(e);
+    e.preventDefault();
+    createProfile(formData , history)
   };
 
   const onChange = (n) =>
@@ -30,6 +33,7 @@ const CreateProfile = () => {
           type="text"
           placeholder="Enter College here"
           name="college"
+          value={college}
           onChange={(n) => onChange(n)}
         ></input>
         <label>
@@ -37,8 +41,9 @@ const CreateProfile = () => {
         </label>
         <input
           type="text"
-          placeholder="grade level"
+          placeholder="Grade level"
           name="gradeLevel"
+          value={gradeLevel}
           onChange={(n) => onChange(n)}
         ></input>
         <label>
@@ -47,6 +52,7 @@ const CreateProfile = () => {
         <input
           type="text"
           placeholder="Major"
+          value={major}
           name="major"
           onChange={(n) => onChange(n)}
         ></input>
@@ -55,6 +61,7 @@ const CreateProfile = () => {
         </label>
         <input
           type="text"
+          value={shortBio}
           placeholder="Short bio here"
           name="shortBio"
           onChange={(n) => onChange(n)}
@@ -65,6 +72,8 @@ const CreateProfile = () => {
   );
 };
 
-CreateProfile.propTypes = {};
+CreateProfile.propTypes = {
+  createProfile: PropTypes.func.isRequired
+};
 
-export default CreateProfile;
+export default connect(null, { createProfile })(withRouter(CreateProfile));
