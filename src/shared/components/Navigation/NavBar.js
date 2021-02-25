@@ -10,9 +10,9 @@ import "./NavBar.css";
 export const NavBar = ({ auth: {isAuthenticated, loading}, logout}) => {
 
   const style = {
-    height: '75%',
+    height: '25px',
     paddingRight: '5px',
-    paddingLeft: '5px'
+    paddingLeft: '5px',
   }
 
   const authLinks = (
@@ -27,7 +27,7 @@ export const NavBar = ({ auth: {isAuthenticated, loading}, logout}) => {
           <Link to="/course">My Courses</Link>
         </li>
         <li>
-          <Link onClick={logout} to='#!'>Sign out</Link>
+          <Link onClick={logout} to='/'>Sign out</Link>
         </li>
       </ul>
 
@@ -50,7 +50,7 @@ export const NavBar = ({ auth: {isAuthenticated, loading}, logout}) => {
   
   return (
     <nav className="nav-bar">
-     <Link className='logo'>
+     <Link className='logo' to='/'>
      <img src={logo} style={style}></img>
 
      </Link>

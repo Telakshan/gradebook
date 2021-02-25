@@ -25,7 +25,9 @@ const Dashboard = ({
         <h1>Dashboard</h1>
         <p>Welcome {user && user.name}</p>
         {profile !== null ? (
-          <Fragment>has</Fragment>
+          <Fragment>
+            <DashboardAction/>
+          </Fragment>
         ) : (
           <Fragment>
               <p>You have not yet created a profile</p>
@@ -33,7 +35,6 @@ const Dashboard = ({
           </Fragment>
           
         )}
-        <DashboardAction/>
       </div>
     </Fragment>
   );

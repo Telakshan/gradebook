@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import Button from '../../shared/components/Button/Button';
-import CourseName from './CourseName';
-import Assignments from './Assignments';
+import React, { useState, Fragment } from "react";
+import Button from "../../shared/components/Button/Button";
+import CourseName from "./CourseName";
+import Assignments from "./Assignments";
 import "./Course.css";
 
 const Course = () => {
-
   const [assignments, setAssignment] = useState([
     {
       id: 1,
@@ -34,18 +33,27 @@ const Course = () => {
   ]);
 
   const deleteAssignment = (id) => {
-      setAssignment(assignments.filter((assignment) => assignment.id !== id));
-  }
+    setAssignment(assignments.filter((assignment) => assignment.id !== id));
+  };
 
   return (
-    <div className='course'>
-        <CourseName courseName='CS316'/>
-        {assignments.length > 0 ? <Assignments assignments={assignments} onDelete={deleteAssignment}/> : <h1>No assignments due</h1>}
-        
-        <h3 className={assignments.length === 0 ? 'grade' : "d-grade"}>Total grade so far: </h3>
-    </div>
+    <Fragment>
+      <div className="course">
+        <CourseName courseName="CS316" />
+        {assignments.length > 0 ? (
+          <Assignments assignments={assignments} onDelete={deleteAssignment} />
+        ) : (
+          <h1>No assignments due</h1>
+        )}
+
+        <h3 className={assignments.length === 0 ? "grade" : "d-grade"}>
+          Total grade so far:{" "}
+        </h3>
+      </div>
+
+      
+    </Fragment>
   );
 };
-
 
 export default Course;

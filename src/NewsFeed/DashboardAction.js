@@ -5,7 +5,7 @@ import edit from './create-outline.svg';
 const DashboardAction = () => {
 
     const style = {
-        maxWidth: '5%'
+        maxWidth: '25px'
     }
     return (
         <div>
