@@ -1,0 +1,35 @@
+*{
+    box-sizing: border-box;
+    font-size: medium;
+}
+
+.course-name{
+    max-width: 600px;
+    min-height: 100px;
+    align-items: center;
+}
+
+.container{
+    margin: 30px;
+    align-items: center;
+
+}
+
+.course-page{
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    color: #61DBFB;
+}
+
+.close{
+    float: right;
+    cursor: pointer;
+}

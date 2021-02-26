@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Assignment = require("../../models/Assignment");
+const Course = require('../../models/Course');
 const auth = require("../../middleware/auth");
 
 router.post("/", auth, async (req, res) => {
@@ -9,6 +10,7 @@ router.post("/", auth, async (req, res) => {
       ...req.body,
       user: req.user.id,
     });
+
 
     await assignment.save();
     res.status(201).send(assignment);
@@ -52,5 +54,7 @@ router.patch("/:id", auth, async (req, res) => {
     res.status(500).send(error);
   }
 });
+
+
 
 module.exports = router;

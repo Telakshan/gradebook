@@ -5,8 +5,6 @@ const auth = require('../../middleware/auth');
 const Assignment = require('../../models/Assignment');
 
 router.post('/', auth, async (req, res) => {
-
-
     const course = new Course({
         ...req.body,
         user: req.user.id
@@ -19,6 +17,17 @@ router.post('/', auth, async (req, res) => {
         res.status(400).send(error);
     }
 });
+
+router.patch('/add/:id', auth, async (req, res) => {
+    try{
+        const course = await Course.findById(req.params.id);
+        course.assignments.unshift(req.body);
+        await course.save();
+        res.status(201).send(course);
+    }catch(error){
+        res.status(400).send('Cannot find course')
+    }
+})
 
 //get all the courses
 router.get('/', auth, async (req, res) => {
@@ -40,6 +49,17 @@ router.delete('/:id', auth, async (req, res) => {
     }catch(error){
         res.status(400).json({msg: 'Course not found'});
     }
+})
+
+router.get('/assignments/:id', auth, async(req, res) => {
+
+    try{
+        const course = await Course.findById(req.params.id);
+        res.json(course.assignments);
+    }catch(error){
+        res.status(400).json({msg: 'Assignments not found'});
+    }
+    
 })
 
 module.exports = router;

@@ -2,8 +2,10 @@ import axios from 'axios';
 import { setAlert } from './alert';
 
 import {
+    CLEAR_PROFILE,
     GET_PROFILE,
     PROFILE_ERROR,
+    ACCOUNT_DELETED,
 } from './types';
 
 export const createProfile = (formData, history, edit = false) => async dispatch => {
@@ -54,3 +56,25 @@ export const getCurrentProfile = () => async dispatch => {
     }
 }
 
+export const deleteAccount = () => async dispatch => {
+
+    if(window.confirm('Are you sure? This is permanent!')){
+
+        try {
+            const res = await axios.delete('/api/profile');
+            
+            dispatch({type: CLEAR_PROFILE});
+            dispatch({type: ACCOUNT_DELETED});
+
+            dispatch(setAlert('Your account has been permanently deleted'))
+
+        } catch (error) {
+            dispatch({
+                type: PROFILE_ERROR,
+                payload: { msg: error.response.statusText, status: error.response.status }
+            })
+        }
+
+    }
+
+}
