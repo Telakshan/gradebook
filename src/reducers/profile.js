@@ -1,10 +1,11 @@
 import { Profiler } from "react";
-import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE } from "../actions/types";
+import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, GET_PROFILES, GET_COURSES } from "../actions/types";
 
  const initialState = {
      profile: null,
      profiles: [],
      loading: true,
+     course: [],
      error: {}
  }
 
@@ -16,6 +17,12 @@ import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE } from "../actions/types";
              return {
                  ...state,
                  profile: payload,
+                 loading: false
+             }
+         case GET_PROFILES:
+             return{
+                 ...state,
+                 profiles: payload,
                  loading: false
              }
          case PROFILE_ERROR:
@@ -30,6 +37,12 @@ import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE } from "../actions/types";
                      profile: null,
                      loading: false
                  }
+         case GET_COURSES:
+             return{
+                 ...state,
+                 courses: payload,
+                 loaading: false
+             }
 
         default: 
              return state

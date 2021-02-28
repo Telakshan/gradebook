@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Course = require('../../models/Course')
 const auth = require('../../middleware/auth');
-const Assignment = require('../../models/Assignment');
 
+//add a course
 router.post('/', auth, async (req, res) => {
     const course = new Course({
         ...req.body,
@@ -18,6 +18,7 @@ router.post('/', auth, async (req, res) => {
     }
 });
 
+//add assignments
 router.patch('/add/:id', auth, async (req, res) => {
     try{
         const course = await Course.findById(req.params.id);
@@ -51,6 +52,7 @@ router.delete('/:id', auth, async (req, res) => {
     }
 })
 
+//get all the assignments
 router.get('/assignments/:id', auth, async(req, res) => {
 
     try{

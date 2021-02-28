@@ -1,41 +1,43 @@
-import React, {useState} from 'react';
-import CourseList from './CourseList';
+import React, { useState, useEffect } from "react";
+import CourseList from "./CourseList";
+import axios from "axios";
+import { FaTimes } from 'react-icons/fa';
 
-import './CourseList.css';
+import "./CourseList.css";
+import Assignment from "./Assignment";
 
-const array = [
-    {
-      id: Math.random(),
-      name: 'CS316',
-      completed: false,
-      totalGrade: 95,
-    },
-    {
-      id: Math.random(),
-      name: 'CS344',
-      completed: false,
-      totalGrade: 100,
-    }
-  ];
+let array = [];
 
- 
+const getAllCourses = async () => {
+  try {
+    const res = await axios.get("/api/addcourse");
+    array = res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const CoursePage = () => {
+  const [courses, setCourses] = useState(array);
 
-    const[courses, setCourses] = useState(array);
+  getAllCourses();
 
+  return (
+    <div className="course-page">
+      {array.map(({ name }) => (
+        <CourseList courseName={name} />
+      ))}
+      {/* {array.assignments ? <div className='course'>
+        <button>Add</button>
+        {assignments.map(({ assignment }) => (
+          <div>
+            {assignment}
+          </div>
+        ))}
+      </div> : null} */}
+      
+    </div>
+  );
+};
 
-    return (
-        <div className='course-page'>
-
-            {
-                array.map(({name}) => (
-                    <CourseList courseName={name}/>
-                ))
-            }
-            
-        </div>
-    )
-}
-
-export default CoursePage
+export default CoursePage;
