@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Course = require('../../models/Course')
+const Assignment = require('../../models/Assignment');
 const auth = require('../../middleware/auth');
 
 //add a course
@@ -19,14 +20,17 @@ router.post('/', auth, async (req, res) => {
 });
 
 //add assignments
-router.patch('/add/:id', auth, async (req, res) => {
+router.patch('/assignment/:id', auth, async (req, res) => {
     try{
         const course = await Course.findById(req.params.id);
         course.assignments.unshift(req.body);
+       // console.log(course.assignments);
         await course.save();
-        res.status(201).send(course);
+        return res.status(201).send(course);
     }catch(error){
+        console.log(error)
         res.status(400).send('Cannot find course')
+        
     }
 })
 
@@ -36,10 +40,11 @@ router.get('/', auth, async (req, res) => {
         const courses = await Course.find();
         res.json(courses);
     }catch(error){
-        console.error(error.message);
         res.status(500).send('Server error');
     }
 })
+
+
 
 //delete a course provided with id
 router.delete('/:id', auth, async (req, res) => {
@@ -49,6 +54,21 @@ router.delete('/:id', auth, async (req, res) => {
         res.json({msg: 'Course deleted'});
     }catch(error){
         res.status(400).json({msg: 'Course not found'});
+    }
+})
+
+//delete assignment
+router.delete('/assignment/:cid/:aid', auth, async (req, res) => {
+    try {
+        console.log('Reached here!')
+        const course = Course.findById(req.params.cid);
+        const assignments = course.assignments.filter(i => i._id === aid);
+        console.log(assignments);
+        course.assignments = assignments;
+        course.save();
+        res.status(200).json(course);
+    } catch (error) {
+        res.status(400).json({msg: 'Cannot do this'});
     }
 })
 

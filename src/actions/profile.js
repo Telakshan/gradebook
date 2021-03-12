@@ -6,7 +6,7 @@ import {
     GET_PROFILE,
     PROFILE_ERROR,
     ACCOUNT_DELETED,
-    UPDATE_COURSES,
+    ADD_COURSE,
     GET_PROFILES,
     GET_COURSES
 } from './types';
@@ -93,7 +93,7 @@ export const AddCourse = (formData, history) => async dispatch => {
         const response = await axios.post('/api/addcourse', formData, config);
 
         dispatch({
-            type: UPDATE_COURSES,
+            type: ADD_COURSE,
             payload: response.data
         });
         dispatch(setAlert('Course Added', 'success'));
@@ -125,7 +125,7 @@ export const AddAssignment = (formData, history) => async dispatch => {
         const response = await axios.post('/api/addcourse', formData, config);
 
         dispatch({
-            type: UPDATE_COURSES,
+            type: ADD_COURSE,
             payload: response.data
         });
         dispatch(setAlert('Course Added', 'success'));

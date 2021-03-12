@@ -23,7 +23,8 @@ import CoursePage from './courses/components/CoursePage';
 import Profiles from './Profiles/Profiles';
 
 import "./App.css";
-
+import AddCourse from "./courses/components/AddCourse";
+import AddAssignment from './courses/components/AddAssignment';
 
 if(localStorage.token){
   setAuthToken(localStorage.token);
@@ -53,6 +54,8 @@ const App = () => {
               <PrivateRoute exact path="/dashboard" component={Dashboard} exact />
               <PrivateRoute exact path="/create-profile" component={CreateProfile} exact />
               <PrivateRoute exact path="/edit-profile" component={EditProfile} exact />
+              <PrivateRoute exact path='/add-course' component={AddCourse}/>
+              <PrivateRoute exact path='/add-assignment' component={AddAssignment}/>
             </Switch>
           </section>
         </Fragment>
