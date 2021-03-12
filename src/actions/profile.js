@@ -82,69 +82,6 @@ export const deleteAccount = () => async dispatch => {
 
 }
 
-//Add course
-export const AddCourse = (formData, history) => async dispatch => {
-    try {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-        const response = await axios.post('/api/addcourse', formData, config);
-
-        dispatch({
-            type: ADD_COURSE,
-            payload: response.data
-        });
-        dispatch(setAlert('Course Added', 'success'));
-
-        history.push('/dashboard');
-    
-        
-    } catch (error) {
-        const errors = error.response.data.errors;
-
-        if(errors){
-            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-        }
-        dispatch({
-            type: PROFILE_ERROR,
-            payload: {msg: error.response.statusText, status: error.response.status}
-        })
-    }
-}
-
-//Add assignment
-export const AddAssignment = (formData, history) => async dispatch => {
-    try {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-        const response = await axios.post('/api/addcourse', formData, config);
-
-        dispatch({
-            type: ADD_COURSE,
-            payload: response.data
-        });
-        dispatch(setAlert('Course Added', 'success'));
-
-        history.push('/dashboard');
-    
-        
-    } catch (error) {
-        const errors = error.response.data.errors;
-
-        if(errors){
-            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-        }
-        dispatch({
-            type: PROFILE_ERROR,
-            payload: {msg: error.response.statusText, status: error.response.status}
-        })
-    }
-}
 
 //Get all profiles
 export const getProfiles = () => async dispatch => {
@@ -185,21 +122,5 @@ export const getProfileById = userId => async dispatch => {
 } 
 
 
-export const getCourses = () => async dispatch => {
-    try {
-        const response = await axios.get('/api/addcourse');
-        
-        dispatch({
-            type: GET_COURSES,
-            payload: response.data
-        })
 
-        
-    } catch (error) {
-        dispatch({
-            type: PROFILE_ERROR,
-            payload: {msg: error.response.statusText, status: error.response.status}
-        })
-    }
-}
  

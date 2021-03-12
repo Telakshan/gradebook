@@ -7,9 +7,9 @@ const Assignment = ({assignment, onDelete}) => {
 
             <h3 >{assignment.name} <FaTimes className='close' onClick={() => onDelete(assignment.id)}/></h3>
             <p>{assignment.duedate}</p>
-            <label>Grade: </label>
+            <label className='label'>Grade: </label>
             <input></input>
-            <label>Percentage: </label>
+            <label className='label'>Percentage: </label>
             <input></input>
 
         </div>

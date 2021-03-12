@@ -6,11 +6,12 @@ import { FaTimes } from 'react-icons/fa';
 import "./CourseList.css";
 import Assignment from "./Assignment";
 
+
 let array = [];
 
 const getAllCourses = async () => {
   try {
-    const res = await axios.get("/api/addcourse");
+    const res = await axios.get("/api/course");
     array = res.data;
   } catch (error) {
     console.log(error);
@@ -20,12 +21,15 @@ const getAllCourses = async () => {
 const CoursePage = () => {
   const [courses, setCourses] = useState(array);
 
-  getAllCourses();
+  useEffect(() => {
+    getAllCourses();
+  }, [courses])
 
+  console.log(array);
   return (
     <div className="course-page">
-      {array.map(({ name }) => (
-        <CourseList courseName={name} />
+      {array.map(({ name, semester }) => (
+        <CourseList courseName={name} semester={semester} />
       ))}
       {/* {array.assignments ? <div className='course'>
         <button>Add</button>

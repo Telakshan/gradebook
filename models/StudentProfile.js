@@ -17,23 +17,6 @@ const StudentProfileSchema = new mongoose.Schema({
     },
     shortBio: {
         type: String
-    },
-    avatar:{
-        type: Buffer
-    },
-    socialmedia: {
-        instagram: {
-            type: String
-        },
-        facebook: {
-            type: String
-        },
-        twitter: {
-            type: String
-        },
-        linkedin: {
-            type: String
-        }
     }
 });
 
