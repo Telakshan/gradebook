@@ -15,6 +15,8 @@ export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';
 export const ADD_COURSE = 'ADD_COURSE';
 export const ADD_ASSIGNMENT = 'ADD_ASSIGNMENT';
 export const GET_COURSES = 'GET_COURSES';
+export const GET_ASSIGNMENTS = 'GET_ASSIGNMENTS';
+
 
 
 

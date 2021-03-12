@@ -38,7 +38,7 @@ router.patch('/assignment/:id', auth, async (req, res) => {
 router.get('/', auth, async (req, res) => {
     try{
         const courses = await Course.find();
-        res.json(courses);
+        res.status(200).json({courses: courses.toObject({getters: true})});
     }catch(error){
         res.status(500).send('Server error');
     }
@@ -60,13 +60,17 @@ router.delete('/:id', auth, async (req, res) => {
 //delete assignment
 router.delete('/assignment/:cid/:aid', auth, async (req, res) => {
     try {
-        console.log('Reached here!')
-        const course = Course.findById(req.params.cid);
-        const assignments = course.assignments.filter(i => i._id === aid);
-        console.log(assignments);
+        const course = await Course.findById(req.params.cid);
+        const assignments =  course.assignments;
+
+        for(const i in assignments){
+            if(assignments[i]._id == req.params.aid){
+                assignments.splice(i, 1);
+            }
+        }
         course.assignments = assignments;
-        course.save();
-        res.status(200).json(course);
+        await course.save();
+        res.status(200).json({course: course.toObject({getters: true})});
     } catch (error) {
         res.status(400).json({msg: 'Cannot do this'});
     }
@@ -77,7 +81,7 @@ router.get('/assignments/:id', auth, async(req, res) => {
 
     try{
         const course = await Course.findById(req.params.id);
-        res.json(course.assignments);
+        res.status(200).json({assignments: course.assignments.toObject({getters: true})});
     }catch(error){
         res.status(400).json({msg: 'Assignments not found'});
     }
