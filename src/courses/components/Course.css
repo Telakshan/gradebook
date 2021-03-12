@@ -34,7 +34,8 @@ p{
 .assignment > input{
     width: 20%;
     border: 2px solid #61DBFB;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    display: inline-block;
     margin-right: 20px;
 }
 
@@ -51,6 +52,21 @@ p{
     text-align: center;
     display: block;
     margin-top: 20px;
+}
+
+.completed{
+    padding-bottom: 10px;
+}
+
+.completed > input{
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 600px){
+    .assignment > input{
+        display: block;
+    }
+
 }
 
 

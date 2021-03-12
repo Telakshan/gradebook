@@ -10,8 +10,15 @@ const AddAssignment = () => {
 
   const onChange = (n) =>
     setFormData({ ...formData, [n.target.name]: n.target.value });
+
+    const assignment = {
+      maxWidth: "500px",
+      justifyContent: "center",
+      margin: "20px auto auto"
+    }
+
   return (
-    <div className="register">
+    <div style={assignment}>
       <form className="form">
         <label>
           <b>Assignment Name</b>

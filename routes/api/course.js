@@ -1,8 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const Course = require('../../models/Course')
-const Assignment = require('../../models/Assignment');
 const auth = require('../../middleware/auth');
+
+
+//get all the courses
+router.get('/', auth, async (req, res) => {
+    try{
+        const courses = await Course.find().select('-assignments');
+        res.status(200).json(courses);
+    }catch(error){
+        res.status(500).send('Server error');
+    }
+})
 
 //add a course
 router.post('/', auth, async (req, res) => {
@@ -24,27 +34,13 @@ router.patch('/assignment/:id', auth, async (req, res) => {
     try{
         const course = await Course.findById(req.params.id);
         course.assignments.unshift(req.body);
-       // console.log(course.assignments);
         await course.save();
         return res.status(201).send(course);
     }catch(error){
         console.log(error)
-        res.status(400).send('Cannot find course')
-        
+        res.status(400).send('Cannot find course');
     }
 })
-
-//get all the courses
-router.get('/', auth, async (req, res) => {
-    try{
-        const courses = await Course.find();
-        res.json(courses);
-    }catch(error){
-        res.status(500).send('Server error');
-    }
-})
-
-
 
 //delete a course provided with id
 router.delete('/:id', auth, async (req, res) => {
@@ -60,13 +56,17 @@ router.delete('/:id', auth, async (req, res) => {
 //delete assignment
 router.delete('/assignment/:cid/:aid', auth, async (req, res) => {
     try {
-        console.log('Reached here!')
-        const course = Course.findById(req.params.cid);
-        const assignments = course.assignments.filter(i => i._id === aid);
-        console.log(assignments);
+        const course = await Course.findById(req.params.cid);
+        const assignments =  course.assignments;
+
+        for(const i in assignments){
+            if(assignments[i]._id == req.params.aid){
+                assignments.splice(i, 1);
+            }
+        }
         course.assignments = assignments;
-        course.save();
-        res.status(200).json(course);
+        await course.save();
+        res.status(200).json({course: course.toObject({getters: true})});
     } catch (error) {
         res.status(400).json({msg: 'Cannot do this'});
     }
@@ -77,7 +77,7 @@ router.get('/assignments/:id', auth, async(req, res) => {
 
     try{
         const course = await Course.findById(req.params.id);
-        res.json(course.assignments);
+        res.status(200).json({assignments: course.assignments.toObject({getters: true})});
     }catch(error){
         res.status(400).json({msg: 'Assignments not found'});
     }

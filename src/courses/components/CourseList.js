@@ -10,7 +10,7 @@ const CourseList = ({ courseName }) => {
       <div className="course-name">
         <Link to="/assignments">
           <div className="assignment">
-            <h3>{courseName} <FaTimesCircle className='close'/></h3>
+            <h3>{courseName}<FaTimesCircle className='close'/></h3>
           </div>
         </Link>
       </div>

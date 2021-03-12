@@ -47,8 +47,6 @@ const App = () => {
             <Switch>
               <Route path="/register" component={Register} exact />
               <Route path="/signin" component={Signin} exact />
-              <Route path="/course" component={CoursePage} exact />
-              <Route path='/assignments' component={Course} exact/>
               <Route path='/profiles' component={Profiles} exact />
              {/* <Route path='/coursepage' component={CoursePage} exact/>*/} 
               <PrivateRoute exact path="/dashboard" component={Dashboard} exact />
@@ -56,6 +54,8 @@ const App = () => {
               <PrivateRoute exact path="/edit-profile" component={EditProfile} exact />
               <PrivateRoute exact path='/add-course' component={AddCourse}/>
               <PrivateRoute exact path='/add-assignment' component={AddAssignment}/>
+              <PrivateRoute path="/course" component={CoursePage} exact />
+              <Route path='/assignments' component={Course} exact/>
             </Switch>
           </section>
         </Fragment>

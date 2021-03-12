@@ -48,10 +48,6 @@ router.post(
       gradeLevel,
       major,
       shortBio,
-      instagram,
-      facebook,
-      twitter,
-      linkedin,
     } = req.body;
 
     const studentprofilefields = {};
@@ -60,12 +56,6 @@ router.post(
     if (gradeLevel) studentprofilefields.gradeLevel = gradeLevel;
     if (major) studentprofilefields.major = major;
     if (shortBio) studentprofilefields.shortBio = shortBio;
-
-    studentprofilefields.socialmedia = {};
-    if (instagram) studentprofilefields.socialmedia.instagram = instagram;
-    if (facebook) studentprofilefields.socialmedia.facebook = facebook;
-    if (twitter) studentprofilefields.socialmedia.twitter = twitter;
-    if (linkedin) studentprofilefields.socialmedia.linkedin = linkedin;
 
     try {
       let studentprofile = await StudentProfile.findOne({ user: req.user.id });
@@ -95,7 +85,7 @@ router.post(
 //upload
 const upload = multer({
   limits: {
-    fileSize: 1000000,
+    fileSize: 2000000,
   },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
@@ -112,7 +102,7 @@ router.post("/avatar", auth, upload.single("avatar"), async (req, res) => {
   try {
     const buffer = await sharp(req.file.buffer)
       .resize({ width: 250, height: 250 })
-      .png()
+      .jpg()
       .toBuffer();
     //await req.user.save();
     const finduser = await StudentProfile.findOneAndUpdate(
