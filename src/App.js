@@ -11,27 +11,30 @@ import Signin from "./Authorization/Signin";
 import Course from "./courses/components/Course";
 import React, { Fragment, useEffect } from "react";
 import store from "./store";
-import Alert from './shared/components/Alert/Alert';
-import Dashboard from './NewsFeed/Dashboard';
+import Alert from "./shared/components/Alert/Alert";
+import Dashboard from "./NewsFeed/Dashboard";
 import { Provider } from "react-redux";
-import { loadUser } from './actions/auth';
-import EditProfile from './ProfileForm/EditProfile';
-import PrivateRoute from './routing/PrivateRoute';
-import setAuthToken from './utils/setAuthToken';
-import CreateProfile from './ProfileForm/CreateProfile';
-import CoursePage from './courses/components/CoursePage';
-import Profiles from './Profiles/Profiles';
+import { loadUser } from "./actions/auth";
+import EditProfile from "./ProfileForm/EditProfile";
+import PrivateRoute from "./routing/PrivateRoute";
+import setAuthToken from "./utils/setAuthToken";
+import CreateProfile from "./ProfileForm/CreateProfile";
+import CoursePage from "./courses/components/CoursePage";
+import Posts from "./Posts/Posts";
+import Profiles from "./Profiles/Profiles";
+import Post from './Post/Post';
 
 import "./App.css";
 import AddCourse from "./courses/components/AddCourse";
-import AddAssignment from './courses/components/AddAssignment';
+import AddAssignment from "./courses/components/AddAssignment";
+import AddPost from "./Posts/AddPost";
+import CommentForm from "./Post/CommentForm";
 
-if(localStorage.token){
+if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
 const App = () => {
-
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
@@ -45,17 +48,39 @@ const App = () => {
           <section className="container">
             <Alert />
             <Switch>
-              <Route path="/register" component={Register} exact />
-              <Route path="/signin" component={Signin} exact />
-              <Route path='/profiles' component={Profiles} exact />
-             {/* <Route path='/coursepage' component={CoursePage} exact/>*/} 
-              <PrivateRoute exact path="/dashboard" component={Dashboard} exact />
-              <PrivateRoute exact path="/create-profile" component={CreateProfile} exact />
-              <PrivateRoute exact path="/edit-profile" component={EditProfile} exact />
-              <PrivateRoute exact path='/add-course' component={AddCourse}/>
-              <PrivateRoute exact path='/add-assignment' component={AddAssignment}/>
-              <PrivateRoute path="/course" component={CoursePage} exact />
-              <Route path='/assignments' component={Course} exact/>
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/signin" component={Signin} />
+              <Route exact path="/profiles" component={Profiles} />
+              <Route exact path="/assignments" component={Course} />
+              <PrivateRoute
+                exact
+                path="/dashboard"
+                component={Dashboard}
+                exact
+              />
+              <PrivateRoute
+                exact
+                path="/create-profile"
+                component={CreateProfile}
+                exact
+              />
+              <PrivateRoute
+                exact
+                path="/edit-profile"
+                component={EditProfile}
+                exact
+              />
+              <PrivateRoute exact path="/add-course" component={AddCourse} />
+              <PrivateRoute
+                exact
+                path="/add-assignment"
+                component={AddAssignment}
+              />
+              <PrivateRoute exact path="/course" component={CoursePage} />
+              <PrivateRoute exact path="/posts" component={Posts} />
+              <PrivateRoute exact path='/addpost' component={AddPost}/>
+              <PrivateRoute exact path='/posts/:id' component={Post}/>
+              <PrivateRoute exact path='/comment' component={CommentForm}/>
             </Switch>
           </section>
         </Fragment>

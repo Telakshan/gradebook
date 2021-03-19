@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-const AddAssignment = () => {
+import {addAssignment} from '../../actions/course'
+
+const AddAssignment = ({addAssignment, history}) => {
   const [formData, setFormData] = useState({
     assignmentName: "",
     grade: "",
@@ -19,7 +21,10 @@ const AddAssignment = () => {
 
   return (
     <div style={assignment}>
-      <form className="form">
+      <form className="form" onSubmit={e => {
+        e.preventDefault();
+        addAssignment(formData, history)
+      }}>
         <label>
           <b>Assignment Name</b>
         </label>

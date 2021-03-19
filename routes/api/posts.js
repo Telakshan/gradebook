@@ -3,9 +3,7 @@ const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const User = require("../../models/User");
 const Post = require("../../models/Post");
-const StudentProfile = require("../../models/StudentProfile");
 const auth = require("../../middleware/auth");
-const { findById } = require("../../models/Post");
 
 //create a post
 router.post(
@@ -21,7 +19,6 @@ router.post(
       const newPost = new Post({
         text: req.body.text,
         name: user.name,
-        avatar: user.avatar,
         user: req.user.id,
       });
 
@@ -77,7 +74,6 @@ router.delete("/:id", auth, async (req, res) => {
 router.patch("/like/:id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-
     if (
       post.likes.filter((like) => like.user.toString() === req.user.id).length >
       0

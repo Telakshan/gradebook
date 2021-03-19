@@ -1,9 +1,15 @@
-import { GET_COURSES, ADD_COURSE, ADD_ASSIGNMENT } from "../actions/types";
+import {
+  GET_COURSES,
+  ADD_COURSE,
+  ADD_ASSIGNMENT,
+  CLEAR_COURSES,
+  PROFILE_ERROR,
+} from "../actions/types";
 
 const initialState = {
-  courses: null,
-  loading: true,
+  course: null,
   courses: [],
+  loading: true,
   error: {},
 };
 
@@ -19,18 +25,26 @@ export default function (state = initialState, action) {
       };
 
     case ADD_COURSE:
-        return{
-            ...state,
-            courses: payload,
-            loading: false
-        }
+      return {
+        ...state,
+        courses: payload,
+        loading: false,
+      };
 
     case ADD_ASSIGNMENT:
-        return{
-            ...state,
-            courses: payload,
-            loading: false
-        }
+      return {
+        ...state,
+        courses: payload,
+        loading: false,
+      };
 
+    case CLEAR_COURSES:
+      return {
+        ...state,
+        courses: null,
+        loading: false,
+      };
+    default:
+      return state;
   }
 }

@@ -5,7 +5,9 @@ import {
     GET_ASSIGNMENTS,
     PROFILE_ERROR,
     ADD_COURSE,
-    ADD_ASSIGNMENT
+    ADD_ASSIGNMENT,
+    CLEAR_COURSES
+    
 } from './types';
 
 //get all assignments
@@ -27,13 +29,16 @@ export const getAllAssignments = (courseId) => async dispatch => {
 }
 
 //get all courses
-export const getAllCourses = () => async dispatch => {
+export const getAllCourses = (userId) => async dispatch => {
+
     try{
-        const res = await axios.get('/api/course');
+        const response = await axios.get(`/api/course${userId}`);
+
         dispatch({
             type: GET_COURSES,
-            payload: res.data
+            payload: response.data
         })
+
     }catch(error){
         dispatch({
             type: PROFILE_ERROR,
@@ -52,7 +57,7 @@ export const addCourse = (formData, history) => async dispatch => {
                 'Content-Type': 'application/json'
             }
         }
-        const response = await axios.post('/api/addcourse', formData, config);
+        const response = await axios.post('/api/course', formData, config);
 
         dispatch({
             type: ADD_COURSE,
@@ -76,7 +81,7 @@ export const addCourse = (formData, history) => async dispatch => {
 }
 
 //Add assignment
-export const AddAssignment = (formData, history) => async dispatch => {
+export const addAssignment = (formData, history) => async dispatch => {
     try {
         const config = {
             headers: {

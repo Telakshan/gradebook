@@ -95,6 +95,7 @@ export const getProfiles = () => async dispatch => {
             type: GET_PROFILES,
             payload: response.data
         });
+
     }catch(error){
         dispatch({
             type: PROFILE_ERROR,

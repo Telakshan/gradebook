@@ -17,13 +17,16 @@ const Dashboard = ({
     getCurrentProfile();
   }, []);
 
+  const assignments = 4;
+
   return loading && profile === null ? (
     <Loading />
   ) : (
     <Fragment>
       <div className="dashboard">
-        <h1>Dashboard</h1>
+        <h1>My Profile</h1>
         <p>Welcome {user && user.name}</p>
+        <h3>You have {assignments} incomplete assignments</h3>
         {profile !== null ? (
           <Fragment>
             <DashboardAction/>
@@ -40,7 +43,7 @@ const Dashboard = ({
   );
 };
 
-Dashboard.protoTypes = {
+Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,

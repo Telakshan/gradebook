@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Button from "../shared/components/Button/Button";
-import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../actions/alert";
@@ -98,7 +96,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   );
 };
 
-Register.prototype = {
+Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { addCourse } from '../../actions/course';
 
 
-const AddCourse = (props) => {
+const AddCourse = ({addCourse, history}) => {
   const [formData, setFormData] = useState({
     name: "",
     semester: "",
@@ -12,9 +12,6 @@ const AddCourse = (props) => {
   });
 
   const {name, semester, completed } = formData;
-
-  console.log(props);
-
 
   const register = {
     maxWidth: "500px",
@@ -25,9 +22,14 @@ const AddCourse = (props) => {
   const onChange = (n) =>
     setFormData({ ...formData, [n.target.name]: n.target.value });
 
+  const submitCourse = (e) => {
+    e.preventDefault();
+    addCourse(formData, history);
+  }
+
   return (
     <div style={register}>
-      <form className="form">
+      <form className="form" onSubmit={(e) => submitCourse(e)}>
           
         <label>
           <b>Course</b>

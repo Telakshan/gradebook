@@ -25,3 +25,20 @@
     bottom: 0;
     width: 100%;
 }
+
+.actions{
+    line-height: 50px;;
+}
+
+
+.fa-plus{
+    margin-right: 5px;
+}
+
+.fa-list{
+    margin-right: 5px;
+}
+
+.fa-edit{
+    margin-right: 5px;
+}

@@ -1,0 +1,48 @@
+.my-1 {
+    margin: 1rem 0;
+  }
+
+.post-container{
+    max-width: 800px;
+    margin: 30px;
+    align-items: center;
+    border: 2px #61DBFB solid;
+    padding: 20px;
+}
+
+.but{
+    margin-right: 5px;
+}
+
+.color{
+    background-color: green;
+}
+
+
+.fa-thumbs-up{
+    margin-left: 5px;
+}
+
+.fa-comment{
+    margin-left: 5px;
+}
+
+.delete{
+    margin-left: 5px;
+    background-color: #be3144;
+}
+
+.delete:hover{
+    background-color: #be3144;
+    opacity: 0.7;
+}
+
+.link-button{
+    padding: 12px;
+    background-color: #61DBFB;
+}
+
+.link-button:hover{
+    color: black;
+}
+

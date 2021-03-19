@@ -1,47 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import CourseList from "./CourseList";
-import axios from "axios";
-import { FaTimes } from 'react-icons/fa';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getAllCourses } from "../../actions/course.js";
 
 import "./CourseList.css";
-import Assignment from "./Assignment";
-
-
-let array = [];
-
-const getAllCourses = async () => {
-  try {
-    const res = await axios.get("/api/course");
-    array = res.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const CoursePage = () => {
-  const [courses, setCourses] = useState(array);
-
+import Loading from "../../Loading/Loading";
+const CoursePage = ({ getAllCourses, course: { courses, loading } }) => {
   useEffect(() => {
     getAllCourses();
-  }, [courses])
+  }, []);
 
-  console.log(array);
   return (
-    <div className="course-page">
-      {array.map(({ name, semester }) => (
-        <CourseList courseName={name} semester={semester} />
-      ))}
-      {/* {array.assignments ? <div className='course'>
-        <button>Add</button>
-        {assignments.map(({ assignment }) => (
-          <div>
-            {assignment}
-          </div>
-        ))}
-      </div> : null} */}
-      
-    </div>
+    <React.Fragment>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="course-page">
+          {courses.length > 0 ? (
+            courses.map((course) => (
+              <CourseList key={course._id} courseName={course.name} />
+            ))
+          ) : (
+            <h4>No Courses</h4>
+          )}
+        </div>
+      )}
+    </React.Fragment>
   );
 };
 
-export default CoursePage;
+CoursePage.propTypes = {
+  getAllCourses: PropTypes.func.isRequired,
+  course: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  course: state.course,
+});
+
+export default connect(mapStateToProps, { getAllCourses })(CoursePage);
