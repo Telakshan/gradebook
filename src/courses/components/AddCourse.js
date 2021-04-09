@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
+import {Link} from 'react-router-dom';
 import { addCourse } from '../../actions/course';
 
 
-const AddCourse = ({addCourse, history}) => {
+const AddCourse = ({addCourse}) => {
   const [formData, setFormData] = useState({
     name: "",
     semester: "",
@@ -19,12 +20,16 @@ const AddCourse = ({addCourse, history}) => {
     margin: "20px auto auto"
   }
 
+  const style = {
+    marginLeft: '10px'
+  }
+
   const onChange = (n) =>
     setFormData({ ...formData, [n.target.name]: n.target.value });
 
   const submitCourse = (e) => {
     e.preventDefault();
-    addCourse(formData, history);
+    addCourse(formData);
   }
 
   return (
@@ -55,6 +60,7 @@ const AddCourse = ({addCourse, history}) => {
 
         <p className='completed'><input type='checkbox' name='completed' checked={completed} value={completed} onChange={e => {setFormData({...formData, completed: !completed})}}></input>Completed</p>
         <button type="submit">Submit</button>
+        <Link to='/course' className='link-button' style={style}>Back to courses</Link>
       </form>
     </div>
   );

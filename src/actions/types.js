@@ -17,6 +17,7 @@ export const ADD_ASSIGNMENT = "ADD_ASSIGNMENT";
 export const GET_COURSES = "GET_COURSES";
 export const GET_ASSIGNMENTS = "GET_ASSIGNMENTS";
 export const CLEAR_COURSES = "CLEAR_COURSES";
+export const DELETE_COURSE = 'DELETE_COURSE';
 export const GET_POSTS = "GET_POSTS";
 export const POST_ERROR = "POST_ERROR";
 export const DELETE_POST = "DELETE_POST";

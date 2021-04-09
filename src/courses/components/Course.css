@@ -62,6 +62,10 @@ p{
     margin-right: 10px;
 }
 
+.course-name{
+    margin-top: 20px;
+}
+
 @media only screen and (max-width: 600px){
     .assignment > input{
         display: block;

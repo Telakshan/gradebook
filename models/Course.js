@@ -21,7 +21,7 @@ const CourseSchema = new mongoose.Schema({
     },
     assignments: [
         {
-            name:{
+            assignmentName:{
                 type: String
             },
             completed: {

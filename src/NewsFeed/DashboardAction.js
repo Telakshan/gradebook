@@ -14,7 +14,7 @@ const DashboardAction = () => {
           <h1>Go to Assignments</h1>
         </Link>
 
-        <Link>
+        <Link to='/course'>
           <h3>Go to Courses</h3>
         </Link>
 

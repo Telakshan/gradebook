@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from "react";
 import Button from "../../shared/components/Button/Button";
 import CourseName from "./CourseName";
+import {Link} from 'react-router-dom';
 import Assignments from "./Assignments";
 import "./Course.css";
 
@@ -39,7 +40,10 @@ const Course = () => {
   return (
     <Fragment>
       <div className="course">
-        <CourseName courseName="CS316" />
+        <Link to='/course' className='arrow-left'>
+        <i className='fas fa-arrow-left'></i>
+        </Link>
+        <CourseName courseName="CS316" className='course-name'/>
         {assignments.length > 0 ? (
           <Assignments assignments={assignments} onDelete={deleteAssignment} />
         ) : (

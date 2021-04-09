@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
-import {addAssignment} from '../../actions/course'
+import { addAssignment } from "../../actions/course";
 
-const AddAssignment = ({addAssignment, history}) => {
+const AddAssignment = ({ courseId, addAssignment }) => {
   const [formData, setFormData] = useState({
     assignmentName: "",
     grade: "",
@@ -13,18 +14,21 @@ const AddAssignment = ({addAssignment, history}) => {
   const onChange = (n) =>
     setFormData({ ...formData, [n.target.name]: n.target.value });
 
-    const assignment = {
-      maxWidth: "500px",
-      justifyContent: "center",
-      margin: "20px auto auto"
-    }
+  const assignment = {
+    maxWidth: "500px",
+    justifyContent: "center",
+    margin: "20px auto auto",
+  };
 
   return (
     <div style={assignment}>
-      <form className="form" onSubmit={e => {
-        e.preventDefault();
-        addAssignment(formData, history)
-      }}>
+      <form
+        className="form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          addAssignment(courseId, formData);
+        }}
+      >
         <label>
           <b>Assignment Name</b>
         </label>
@@ -61,4 +65,4 @@ const AddAssignment = ({addAssignment, history}) => {
   );
 };
 
-export default AddAssignment;
+export default connect(null, { addAssignment })(AddAssignment);

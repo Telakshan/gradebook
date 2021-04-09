@@ -6,10 +6,14 @@ import { getAllCourses } from "../../actions/course.js";
 
 import "./CourseList.css";
 import Loading from "../../Loading/Loading";
-const CoursePage = ({ getAllCourses, course: { courses, loading } }) => {
+const CoursePage = ({
+  getAllCourses,
+  course: { courses, loading },
+  auth: { user },
+}) => {
   useEffect(() => {
-    getAllCourses();
-  }, []);
+    getAllCourses(user._id);
+  }, [getAllCourses, user._id]);
 
   return (
     <React.Fragment>
@@ -33,10 +37,12 @@ const CoursePage = ({ getAllCourses, course: { courses, loading } }) => {
 CoursePage.propTypes = {
   getAllCourses: PropTypes.func.isRequired,
   course: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   course: state.course,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { getAllCourses })(CoursePage);

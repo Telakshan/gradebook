@@ -4,6 +4,7 @@ import {
   ADD_ASSIGNMENT,
   CLEAR_COURSES,
   PROFILE_ERROR,
+  DELETE_COURSE
 } from "../actions/types";
 
 const initialState = {
@@ -27,14 +28,21 @@ export default function (state = initialState, action) {
     case ADD_COURSE:
       return {
         ...state,
-        courses: payload,
+        courses: [payload, ...state.posts],
         loading: false,
       };
+
+    case DELETE_COURSE:
+      return{
+        ...state,
+        courses: state.courses.filter((course) => course._id !== payload),
+        loading: false
+      }
 
     case ADD_ASSIGNMENT:
       return {
         ...state,
-        courses: payload,
+        courses: {...state.course, assignments: payload},
         loading: false,
       };
 

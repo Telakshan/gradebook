@@ -30,14 +30,13 @@ router.post('/', auth, async (req, res) => {
 });
 
 //add assignments
-router.patch('/assignment/:id', auth, async (req, res) => {
+router.post('/assignment/:id', auth, async (req, res) => {
     try{
         const course = await Course.findById(req.params.id);
         course.assignments.unshift(req.body);
         await course.save();
         return res.status(201).send(course);
     }catch(error){
-        console.log(error)
         res.status(400).send('Cannot find course');
     }
 })
